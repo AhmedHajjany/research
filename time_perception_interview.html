@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross-Cultural Time Perception Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .researcher {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .form-section:hover {
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: #e9ecef;
+            transform: scale(1.05);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+        }
+
+        .checkbox-item.selected {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .expression-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .expression-card:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .expression-card.selected {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .expression-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .question-group {
+            background: #f1f3f4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .recording-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px dashed #e0e0e0;
+        }
+
+        .record-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .record-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .record-btn.recording {
+            background: #27ae60;
+            animation: pulse 1.5s infinite;
+        }
+
+        .record-btn.stopped {
+            background: #3498db;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .recording-status {
+            flex: 1;
+            color: #555;
+        }
+
+        .recording-time {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .voice-note {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .recording-instruction {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            color: #2d5a2d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .intro-text {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cross-Cultural Time Perception Study</h1>
+            <p class="researcher">Conducted by Hajjany Ahmed | Applied Linguistics Master's Student</p>
+            <p>Understanding how North Americans and Moroccans perceive time through language</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+
+        <!-- Section 1: Demographics -->
+        <div class="form-section" id="section1">
+            <h2 class="section-title">Participant Information</h2>
+            <div class="form-group">
+                <label for="identifier">Name or Identifier:</label>
+                <input type="text" id="identifier" placeholder="Enter your name or a preferred identifier">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" min="18" max="100">
+            </div>
+            <div class="form-group">
+                <label>Country:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item" onclick="selectCountry(this, 'canada')">
+                        <input type="radio" name="country" value="canada" id="canada">
+                        <label for="canada">Canada</label>
+                    </div>
+                    <div class="checkbox-item" onclick="selectCountry(this, 'usa')">
+                        <input type="radio" name="country" value="usa" id="usa">
+                        <label for="usa">United States</label>
+                    </div>
+                    <div class="checkbox-item" onclick="selectCountry(this, 'uk')">
+                        <input type="radio" name="country" value="uk" id="uk">
+                        <label for="uk">United Kingdom</label>
+                    </div>
+                    <div class="checkbox-item" onclick="selectCountry(this, 'other')">
+                        <input type="radio" name="country" value="other" id="other">
+                        <label for="other">Other English Speaking Country</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="region">Region/Province/State:</label>
+                <input type="text" id="region" placeholder="e.g., Ontario, California, London">
+            </div>
+            <div class="form-group">
+                <label for="background">Cultural/Ethnic Background:</label>
+                <input type="text" id="background" placeholder="Please describe your cultural or ethnic background">
+            </div>
+            <div class="form-group">
+                <label for="languages">Native Language(s):</label>
+                <input type="text" id="languages" placeholder="List your native language(s)">
+            </div>
+            <button class="btn" onclick="nextSection(2)">Continue</button>
+        </div>
+
+        <!-- Section 2: Introduction -->
+        <div class="form-section hidden" id="section2">
+            <h2 class="section-title">Welcome to the Study</h2>
+            <div class="intro-text">
+                <p><strong>Hello!</strong> My name is Hajjany Ahmed, an Applied Linguistics Master's student. I am conducting my MA dissertation on cross cultural communication studies. This research revolves around the way North Americans and Moroccans perceive time through language.</p>
+                <p>I'm interested in hearing your thoughts about how you talk about time in everyday life. This will be very conversational - just share whatever comes to mind.</p>
+            </div>
+            <button class="btn" onclick="nextSection(3)">Begin Interview</button>
+        </div>
+
+        <!-- Section 3: Initial Discussion -->
+        <div class="form-section hidden" id="section3">
+            <h2 class="section-title">Time Expressions in Daily Life</h2>
+            <div class="voice-note">
+                🎙️ <strong>Voice Recording Section:</strong> Please record your spoken responses to make this more conversational and natural, just as intended for this interview.
+            </div>
+            <p style="margin-bottom: 20px; font-size: 1.1em; color: #555;">Before we start discussion about daily expressions about time, I'm really curious about all the different ways you talk about time in North American English. For instance, you may say things like 'time is money,' 'time flies,' 'killing time,' or 'make time.'</p>
+            
+            <div class="form-group">
+                <label for="timeThoughts">When you hear these kinds of expressions or use them, what do they tell you about how you think about time?</label>
+                <div class="recording-instruction">
+                    📝 You can either type your response OR record your voice (recommended for a more natural conversation)
+                </div>
+                <textarea id="timeThoughts" rows="5" placeholder="Share your thoughts about what these expressions reveal about how North Americans think about time..."></textarea>
+                <div class="recording-controls">
+                    <button class="record-btn" id="recordBtn1" onclick="toggleRecording('timeThoughts', 1)">🎤</button>
+                    <div class="recording-status">
+                        <div id="status1">Click to start recording your response</div>
+                        <div class="recording-time" id="timer1"></div>
+                    </div>
+                </div>
+                <audio id="audio1" class="audio-player" controls style="display: none;"></audio>
+            </div>
+            
+            <div class="form-group">
+                <label for="timeExample">Can you give an example of that?</label>
+                <textarea id="timeExample" rows="3" placeholder="Provide a specific example or situation..."></textarea>
+                <div class="recording-controls">
+                    <button class="record-btn" id="recordBtn2" onclick="toggleRecording('timeExample', 2)">🎤</button>
+                    <div class="recording-status">
+                        <div id="status2">Click to start recording your example</div>
+                        <div class="recording-time" id="timer2"></div>
+                    </div>
+                </div>
+                <audio id="audio2" class="audio-player" controls style="display: none;"></audio>
+            </div>
+            
+            <button class="btn" onclick="nextSection(4)">Continue to Expression Selection</button>
+        </div>
+
+        <!-- Section 4: Expression Selection -->
+        <div class="form-section hidden" id="section4">
+            <h2 class="section-title">Select 8 Time Expressions</h2>
+            <p style="margin-bottom: 20px; color: #555;">Please look at this list of expressions and pick out 8 that resonate with you or that you use frequently:</p>
+            
+            <div id="expressionsList">
+                <!-- Expressions will be populated by JavaScript -->
+            </div>
+            
+            <p id="selectionCount" style="margin-top: 15px; font-weight: bold; color: #667eea;">Selected: 0/8</p>
+            <button class="btn" id="continueBtn" onclick="nextSection(5)" style="opacity: 0.5; cursor: not-allowed;" disabled>Continue to Analysis</button>
+        </div>
+
+        <!-- Section 5: Expression Analysis -->
+        <div class="form-section hidden" id="section5">
+            <h2 class="section-title">Analyze Your Selected Expressions</h2>
+            <div id="selectedExpressions">
+                <!-- Selected expressions analysis will be populated by JavaScript -->
+            </div>
+            <button class="btn" onclick="nextSection(6)">Continue</button>
+        </div>
+
+        <!-- Section 6: Additional Expressions -->
+        <div class="form-section hidden" id="section6">
+            <h2 class="section-title">Additional Time Expressions</h2>
+            <div class="voice-note">
+                🎙️ Please record your response to share your thoughts naturally
+            </div>
+            
+            <p style="margin-bottom: 20px; color: #555;">Here are the remaining expressions from our list that you didn't select earlier:</p>
+            
+            <div id="remainingExpressions" style="margin-bottom: 20px;">
+                <!-- Remaining expressions will be populated by JavaScript -->
+            </div>
+            
+            <div class="form-group">
+                <label for="additionalExpressions">Please pick out five expressions from the list above that you think share common points with the previous expressions you analyzed. What makes you choose these expressions?</label>
+                <div class="recording-instruction">
+                    💡 <strong>Instructions:</strong> Select 5 expressions from the list above, then explain your choices either by typing or recording your voice.
+                </div>
+                <textarea id="additionalExpressions" rows="6" placeholder="List the 5 expressions you chose and explain what makes you choose them - what common points do they share with your previous selections?"></textarea>
+                <div class="recording-controls">
+                    <button class="record-btn" id="recordBtn101" onclick="toggleRecording('additionalExpressions', 101)">🎤</button>
+                    <div class="recording-status">
+                        <div id="status101">Click to record your additional expressions</div>
+                        <div class="recording-time" id="timer101"></div>
+                    </div>
+                </div>
+                <audio id="audio101" class="audio-player" controls style="display: none;"></audio>
+            </div>
+            <button class="btn" onclick="nextSection(7)">Final Question</button>
+        </div>
+
+        <!-- Section 7: Final Thoughts -->
+        <div class="form-section hidden" id="section7">
+            <h2 class="section-title">Final Thoughts</h2>
+            <div class="voice-note">
+                🎙️ Share your final thoughts through voice recording for a more personal touch
+            </div>
+            <div class="form-group">
+                <label for="finalThoughts">Is there anything else you want to add about how North Americans talk about time that we haven't covered? Any other expressions or thoughts that come to mind?</label>
+                <textarea id="finalThoughts" rows="5" placeholder="Please feel free to share any additional thoughts..."></textarea>
+                <div class="recording-controls">
+                    <button class="record-btn" id="recordBtn102" onclick="toggleRecording('finalThoughts', 102)">🎤</button>
+                    <div class="recording-status">
+                        <div id="status102">Click to record your final thoughts</div>
+                        <div class="recording-time" id="timer102"></div>
+                    </div>
+                </div>
+                <audio id="audio102" class="audio-player" controls style="display: none;"></audio>
+            </div>
+            <button class="btn" onclick="submitInterview()">Submit Interview</button>
+        </div>
+
+        <!-- Section 8: Thank You -->
+        <div class="form-section hidden" id="section8">
+            <h2 class="section-title">Thank You!</h2>
+            <div style="text-align: center; padding: 40px;">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Your responses have been recorded successfully!</h3>
+                <p style="font-size: 1.1em; color: #555; margin-bottom: 20px;">Thank you for participating in this cross-cultural communication study. Your insights about time perception in North American English are valuable for understanding how language shapes our conceptualization of time.</p>
+                <p style="color: #777;">If you have any questions about this research, please feel free to contact Hajjany Ahmed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const expressions = [
+            "Time is money",
+            "Time flies", 
+            "Killing time",
+            "Make time",
+            "In the nick of time",
+            "Time heals all wounds",
+            "Behind the times",
+            "Have time on your hands",
+            "Withstand the ravages of time",
+            "A race against time",
+            "Have the time of your life",
+            "Stand the test of time",
+            "Bide your time until",
+            "Time will tell",
+            "The time is ripe",
+            "Time sink",
+            "A stitch in time saves nine",
+            "The hands of time",
+            "Time hack",
+            "In no time"
+        ];
+
+        let selectedExpressions = [];
+        let currentSection = 1;
+        let responses = {};
+        let recordings = {};
+        let mediaRecorder = null;
+        let recordingTimer = null;
+        let recordingStartTime = 0;
+        let currentRecordingId = null;
+
+        let selectedAdditionalExpressions = [];
+
+        function updateProgress() {
+            const progress = (currentSection / 8) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function selectCountry(element, value) {
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+        }
+
+        function populateExpressions() {
+            const container = document.getElementById('expressionsList');
+            expressions.forEach((expr, index) => {
+                const card = document.createElement('div');
+                card.className = 'expression-card';
+                card.innerHTML = `
+                    <div class="expression-title">"${expr}"</div>
+                `;
+                card.onclick = () => toggleExpression(card, expr, index);
+                container.appendChild(card);
+            });
+        }
+
+        function toggleExpression(card, expression, index) {
+            if (card.classList.contains('selected')) {
+                card.classList.remove('selected');
+                selectedExpressions = selectedExpressions.filter(item => item.expression !== expression);
+            } else {
+                if (selectedExpressions.length < 8) {
+                    card.classList.add('selected');
+                    selectedExpressions.push({ expression, index });
+                }
+            }
+            
+            updateSelectionCount();
+        }
+
+        function updateSelectionCount() {
+            const count = selectedExpressions.length;
+            document.getElementById('selectionCount').textContent = `Selected: ${count}/8`;
+            
+            const continueBtn = document.getElementById('continueBtn');
+            if (count === 8) {
+                continueBtn.disabled = false;
+                continueBtn.style.opacity = '1';
+                continueBtn.style.cursor = 'pointer';
+            } else {
+                continueBtn.disabled = true;
+                continueBtn.style.opacity = '0.5';
+                continueBtn.style.cursor = 'not-allowed';
+            }
+        }
+
+        function populateSelectedExpressions() {
+            const container = document.getElementById('selectedExpressions');
+            container.innerHTML = '';
+            
+            selectedExpressions.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'question-group';
+                div.innerHTML = `
+                    <h3 style="color: #667eea; margin-bottom: 15px;">"${item.expression}"</h3>
+                    <div class="voice-note">
+                        🎙️ Please record your spoken responses for each question about this expression
+                    </div>
+                    <div class="question">
+                        <h4>What does this expression tell you about time?</h4>
+                        <textarea id="meaning_${index}" rows="3" placeholder="Describe what this expression reveals about time..."></textarea>
+                        <div class="recording-controls">
+                            <button class="record-btn" id="recordBtn_meaning_${index}" onclick="toggleRecording('meaning_${index}', 'meaning_${index}')">🎤</button>
+                            <div class="recording-status">
+                                <div id="status_meaning_${index}">Click to record your response</div>
+                                <div class="recording-time" id="timer_meaning_${index}"></div>
+                            </div>
+                        </div>
+                        <audio id="audio_meaning_${index}" class="audio-player" controls style="display: none;"></audio>
+                    </div>
+                    <div class="question">
+                        <h4>What situation, scenario, or image comes to mind when you use or hear this expression?</h4>
+                        <textarea id="scenario_${index}" rows="3" placeholder="Describe a situation or mental image..."></textarea>
+                        <div class="recording-controls">
+                            <button class="record-btn" id="recordBtn_scenario_${index}" onclick="toggleRecording('scenario_${index}', 'scenario_${index}')">🎤</button>
+                            <div class="recording-status">
+                                <div id="status_scenario_${index}">Click to record your response</div>
+                                <div class="recording-time" id="timer_scenario_${index}"></div>
+                            </div>
+                        </div>
+                        <audio id="audio_scenario_${index}" class="audio-player" controls style="display: none;"></audio>
+                    </div>
+                    <div class="question">
+                        <h4>In this expression, what do you think time is being compared to?</h4>
+                        <textarea id="comparison_${index}" rows="3" placeholder="What metaphor or comparison is being used for time?"></textarea>
+                        <div class="recording-controls">
+                            <button class="record-btn" id="recordBtn_comparison_${index}" onclick="toggleRecording('comparison_${index}', 'comparison_${index}')">🎤</button>
+                            <div class="recording-status">
+                                <div id="status_comparison_${index}">Click to record your response</div>
+                                <div class="recording-time" id="timer_comparison_${index}"></div>
+                            </div>
+                        </div>
+                        <audio id="audio_comparison_${index}" class="audio-player" controls style="display: none;"></audio>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function populateRemainingExpressions() {
+            const container = document.getElementById('remainingExpressions');
+            const selectedExpressionsText = selectedExpressions.map(item => item.expression);
+            const remainingExpressions = expressions.filter(expr => !selectedExpressionsText.includes(expr));
+            
+            container.innerHTML = '';
+            
+            if (remainingExpressions.length === 0) {
+                container.innerHTML = '<p style="color: #999; font-style: italic;">All expressions were selected in the previous section.</p>';
+                return;
+            }
+            
+            remainingExpressions.forEach((expr, index) => {
+                const card = document.createElement('div');
+                card.className = 'expression-card';
+                card.innerHTML = `
+                    <div class="expression-title">"${expr}"</div>
+                `;
+                card.onclick = () => toggleAdditionalExpression(card, expr);
+                container.appendChild(card);
+            });
+            
+            // Add instruction
+            const instruction = document.createElement('div');
+            instruction.style.cssText = 'margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 8px; color: #1976d2; font-size: 0.9em;';
+            instruction.innerHTML = `📌 <strong>Selected: ${selectedAdditionalExpressions.length}/5</strong> - Click on expressions to select them, then explain your choices below.`;
+            container.appendChild(instruction);
+        }
+
+        function toggleAdditionalExpression(card, expression) {
+            if (card.classList.contains('selected')) {
+                card.classList.remove('selected');
+                selectedAdditionalExpressions = selectedAdditionalExpressions.filter(expr => expr !== expression);
+            } else {
+                if (selectedAdditionalExpressions.length < 5) {
+                    card.classList.add('selected');
+                    selectedAdditionalExpressions.push(expression);
+                } else {
+                    // Show message if trying to select more than 5
+                    const instruction = document.querySelector('#remainingExpressions div:last-child');
+                    instruction.style.background = '#ffebee';
+                    instruction.style.color = '#c62828';
+                    instruction.innerHTML = '⚠️ <strong>Maximum 5 expressions</strong> - Please deselect one first if you want to choose a different one.';
+                    setTimeout(() => {
+                        instruction.style.background = '#e3f2fd';
+                        instruction.style.color = '#1976d2';
+                        instruction.innerHTML = `📌 <strong>Selected: ${selectedAdditionalExpressions.length}/5</strong> - Click on expressions to select them, then explain your choices below.`;
+                    }, 3000);
+                    return;
+                }
+            }
+            
+            // Update the instruction counter
+            const instruction = document.querySelector('#remainingExpressions div:last-child');
+            instruction.innerHTML = `📌 <strong>Selected: ${selectedAdditionalExpressions.length}/5</strong> - Click on expressions to select them, then explain your choices below.`;
+        }
+
+        function nextSection(sectionNum) {
+            // Save current section data
+            saveCurrentSectionData();
+            
+            // Hide current section
+            document.getElementById(`section${currentSection}`).classList.add('hidden');
+            
+            // Show next section
+            document.getElementById(`section${sectionNum}`).classList.remove('hidden');
+            
+            currentSection = sectionNum;
+            updateProgress();
+            
+            // Special handling for certain sections
+            if (sectionNum === 4) {
+                populateExpressions();
+            } else if (sectionNum === 5) {
+                populateSelectedExpressions();
+            } else if (sectionNum === 6) {
+                populateRemainingExpressions();
+            }
+        }
+
+        function saveCurrentSectionData() {
+            // Save form data based on current section
+            switch(currentSection) {
+                case 1:
+                    responses.demographics = {
+                        identifier: document.getElementById('identifier').value,
+                        age: document.getElementById('age').value,
+                        country: document.querySelector('input[name="country"]:checked')?.value,
+                        region: document.getElementById('region').value,
+                        background: document.getElementById('background').value,
+                        languages: document.getElementById('languages').value
+                    };
+                    break;
+                case 3:
+                    responses.initialThoughts = {
+                        timeThoughts: document.getElementById('timeThoughts').value,
+                        timeExample: document.getElementById('timeExample').value
+                    };
+                    break;
+                case 5:
+                    responses.expressionAnalysis = {};
+                    selectedExpressions.forEach((item, index) => {
+                        responses.expressionAnalysis[item.expression] = {
+                            meaning: document.getElementById(`meaning_${index}`)?.value || '',
+                            scenario: document.getElementById(`scenario_${index}`)?.value || '',
+                            comparison: document.getElementById(`comparison_${index}`)?.value || ''
+                        };
+                    });
+                    break;
+                case 6:
+                    responses.additionalExpressions = document.getElementById('additionalExpressions').value;
+                    responses.selectedAdditionalExpressions = selectedAdditionalExpressions;
+                    break;
+                case 7:
+                    responses.finalThoughts = document.getElementById('finalThoughts').value;
+                    break;
+            }
+        }
+
+        function submitInterview() {
+            saveCurrentSectionData();
+            
+            // Store all responses
+            responses.selectedExpressions = selectedExpressions.map(item => item.expression);
+            responses.submissionTime = new Date().toISOString();
+            responses.recordings = recordings;
+            
+            // In a real implementation, you would send this data to a server
+            console.log('Interview Data:', responses);
+            console.log('Voice Recordings:', recordings);
+            
+            // Show thank you section
+            nextSection(8);
+            
+            // Optional: Display formatted results for the researcher
+            displayResults();
+        }
+
+        // Voice Recording Functions
+        async function toggleRecording(textareaId, recordingId) {
+            const recordBtn = document.getElementById(`recordBtn${recordingId.toString().includes('_') ? '_' + recordingId : recordingId}`);
+            const statusDiv = document.getElementById(`status${recordingId.toString().includes('_') ? '_' + recordingId : recordingId}`);
+            const timerDiv = document.getElementById(`timer${recordingId.toString().includes('_') ? '_' + recordingId : recordingId}`);
+            const audioElement = document.getElementById(`audio${recordingId.toString().includes('_') ? '_' + recordingId : recordingId}`);
+
+            if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    currentRecordingId = recordingId;
+                    
+                    const chunks = [];
+                    mediaRecorder.ondataavailable = (event) => {
+                        chunks.push(event.data);
+                    };
+                    
+                    mediaRecorder.onstop = () => {
+                        const blob = new Blob(chunks, { type: 'audio/wav' });
+                        const url = URL.createObjectURL(blob);
+                        audioElement.src = url;
+                        audioElement.style.display = 'block';
+                        
+                        // Store the recording
+                        recordings[recordingId] = {
+                            blob: blob,
+                            url: url,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        // Update UI
+                        recordBtn.innerHTML = '🎤';
+                        recordBtn.classList.remove('recording');
+                        recordBtn.classList.add('stopped');
+                        statusDiv.textContent = 'Recording saved! You can play it back above.';
+                        timerDiv.textContent = '';
+                        
+                        // Stop all tracks
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+                    
+                    mediaRecorder.start();
+                    recordBtn.innerHTML = '⏹️';
+                    recordBtn.classList.add('recording');
+                    statusDiv.textContent = 'Recording... Click to stop';
+                    
+                    // Start timer
+                    recordingStartTime = Date.now();
+                    recordingTimer = setInterval(() => {
+                        const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+                        const minutes = Math.floor(elapsed / 60);
+                        const seconds = elapsed % 60;
+                        timerDiv.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                    }, 1000);
+                    
+                } catch (error) {
+                    console.error('Error accessing microphone:', error);
+                    statusDiv.textContent = 'Error: Could not access microphone. Please check permissions.';
+                }
+            } else if (mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                clearInterval(recordingTimer);
+            }
+        }
+
+        function displayResults() {
+            // This function could format and display the results for the researcher
+            console.log('=== INTERVIEW RESULTS ===');
+            console.log('Participant:', responses.demographics);
+            console.log('Selected Expressions:', responses.selectedExpressions);
+            console.log('Analysis:', responses.expressionAnalysis);
+            console.log('Additional Expressions:', responses.additionalExpressions);
+            console.log('Final Thoughts:', responses.finalThoughts);
+        }
+
+        // Initialize the form
+        updateProgress();
+    </script>
+</body>
+</html>
